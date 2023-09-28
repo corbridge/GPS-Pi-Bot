@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "gps-bot"
+version = "0.1.0"
+description = ""
+authors = ["Cornelio Posadas P <posadascornelio38@gmail.com>"]
+readme = "README.md"
+packages = [{include = "gps_bot"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+PyQt5 = "5.15.9"
+PyQt5-Qt5 = "5.15.2"
+PyQt5-sip = "12.12.2"
+PyQtWebEngine = "5.15.6"
+PyQtWebEngine-Qt5 = "5.15.2"
+folium = "0.14.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
