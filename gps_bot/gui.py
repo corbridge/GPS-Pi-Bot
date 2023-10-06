@@ -4,9 +4,7 @@ import folium
 from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout, QVBoxLayout
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 
-"""
-Folium in PyQt5
-"""
+
 class GuiGPS(QWidget):
     def __init__(self):
         super().__init__()
@@ -17,15 +15,18 @@ class GuiGPS(QWidget):
         layout = QVBoxLayout()
         self.setLayout(layout)
 
-        fime = (25.725123035154194, -100.31350035231671)
-        mty = (25.674723164923137, -100.32531291744122)
+        fime_1 = [25.725123035154194, -100.31350035231671]
 
-        coordinate = mty
+        coordinate = fime_1
         m = folium.Map(
         	tiles='Stamen Terrain',
         	zoom_start=20,
         	location=coordinate
         )
+
+        folium.Marker(location=fime_1,
+                      popup='Your Location',
+                      icon=folium.Icon(icon='arrow-up', prefix='fa')).add_to(m)
 
         # save map data to data object
         data = io.BytesIO()
@@ -34,7 +35,6 @@ class GuiGPS(QWidget):
         webView = QWebEngineView()
         webView.setHtml(data.getvalue().decode())
         layout.addWidget(webView)
-
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
