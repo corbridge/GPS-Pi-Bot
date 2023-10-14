@@ -1,19 +1,18 @@
 import sys
 import io
 import folium
-from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout, QVBoxLayout
+from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout, QVBoxLayout, QMainWindow
 from PyQt5.QtWebEngineWidgets import QWebEngineView
+from PyQt5 import uic
 
 
-class GuiGPS(QWidget):
+class GuiGPS(QMainWindow):
     def __init__(self):
-        super().__init__()
-        self.setWindowTitle('Folium in PyQt Example')
-        self.window_width, self.window_height = 1200, 800
-        self.setMinimumSize(self.window_width, self.window_height)
+        super(GuiGPS, self).__init__()
+        uic.loadUi(r'gui.ui', self)
+        self.setWindowTitle('GPS Bot')
 
-        layout = QVBoxLayout()
-        self.setLayout(layout)
+        spot = self.findChild(QVBoxLayout, 'main_spot')
 
         fime_1 = [25.725123035154194, -100.31350035231671]
 
@@ -34,7 +33,7 @@ class GuiGPS(QWidget):
 
         webView = QWebEngineView()
         webView.setHtml(data.getvalue().decode())
-        layout.addWidget(webView)
+        spot.addWidget(webView)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
