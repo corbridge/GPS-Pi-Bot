@@ -1,7 +1,7 @@
 import sys
 import io
 import folium
-from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout, QVBoxLayout, QMainWindow
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QMainWindow
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 from PyQt5 import uic
 
@@ -13,6 +13,16 @@ class GuiGPS(QMainWindow):
         self.setWindowTitle('GPS Bot')
 
         spot = self.findChild(QVBoxLayout, 'main_spot')
+        
+        # Buttons
+        self.start_robot = self.findChild(QPushButton, 'start')
+        self.stop_robot = self.findChild(QPushButton, 'stop')
+        self.camera_robot = self.findChild(QPushButton, 'camera')
+
+        #Buttons actions
+        self.start_robot.clicked.connect(self.start_button_click)
+        self.stop_robot.clicked.connect(self.stop_button_click)
+        self.camera_robot.clicked.connect(self.camera_button_click)
 
         fime_1 = [25.725123035154194, -100.31350035231671]
 
@@ -34,6 +44,15 @@ class GuiGPS(QMainWindow):
         webView = QWebEngineView()
         webView.setHtml(data.getvalue().decode())
         spot.addWidget(webView)
+    
+    def start_button_click(self):
+        print("start")
+    
+    def stop_button_click(self):
+        print("stop")
+    
+    def camera_button_click(self):
+        print("camera")
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
