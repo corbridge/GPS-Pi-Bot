@@ -1,71 +1,42 @@
-import sys
-import io
-import folium
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QMainWindow
-from PyQt5.QtWebEngineWidgets import QWebEngineView
-from PyQt5 import uic
+from tkinter import *
+import tkintermapview
+
+def add_marker_event(coords):
+    new_marker = map_widget.set_marker(coords[0], coords[1], text="position")
+
+root = Tk()
+root.title("GPS BOT GUI")
+# root.iconbitmap()
+root.geometry("700x550")
+
+label = LabelFrame(root)
+label.pack(pady=20)
+
+fime = [25.7252, -100.3135]
+fime_2 = [25.7258, -100.3138]
+
+map_widget = tkintermapview.TkinterMapView(label, width=500, height=500, corner_radius=0)
+map_widget.set_position(fime[0], fime[1])
+map_widget.set_zoom(20)
 
 
-class GuiGPS(QMainWindow):
-    def __init__(self):
-        super(GuiGPS, self).__init__()
-        uic.loadUi(r'gui.ui', self)
-        self.setWindowTitle('GPS Bot')
+# first_position = map_widget.set_marker(fime[0], fime[1], text="First position")
+# second_position = map_widget.set_marker(fime_2[0], fime_2[1], text="Second position")
 
-        spot = self.findChild(QVBoxLayout, 'main_spot')
-        
-        # Buttons
-        self.start_robot = self.findChild(QPushButton, 'start')
-        self.stop_robot = self.findChild(QPushButton, 'stop')
-        self.camera_robot = self.findChild(QPushButton, 'camera')
+map_widget.add_right_click_menu_command(label="Add first position",
+                                        command=add_marker_event,
+                                        pass_coords=True)
 
-        #Buttons actions
-        self.start_robot.clicked.connect(self.start_button_click)
-        self.stop_robot.clicked.connect(self.stop_button_click)
-        self.camera_robot.clicked.connect(self.camera_button_click)
+map_widget.add_right_click_menu_command(label="Add second position",
+                                        command=add_marker_event,
+                                        pass_coords=True)
 
-        fime_1 = [25.725123035154194, -100.31350035231671]
+# polygon_1 = map_widget.set_polygon([(fime[0], fime[1]),
+#                                     (fime_2[0], fime_2[1])],
+#                                    # fill_color=None,
+#                                    # outline_color="red",
+#                                    # border_width=12,
+#                                    name="path")
 
-        coordinate = fime_1
-        m = folium.Map(
-        	tiles='Stamen Terrain',
-        	zoom_start=20,
-        	location=coordinate
-        )
-
-        folium.Marker(location=fime_1,
-                      popup='Your Location',
-                      icon=folium.Icon(icon='arrow-up', prefix='fa')).add_to(m)
-
-        # save map data to data object
-        data = io.BytesIO()
-        m.save(data, close_file=False)
-
-        webView = QWebEngineView()
-        webView.setHtml(data.getvalue().decode())
-        spot.addWidget(webView)
-    
-    def start_button_click(self):
-        print("start")
-    
-    def stop_button_click(self):
-        print("stop")
-    
-    def camera_button_click(self):
-        print("camera")
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    app.setStyleSheet('''
-        QWidget {
-            font-size: 35px;
-        }
-    ''')
-    
-    myApp = GuiGPS()
-    myApp.show()
-
-    try:
-        sys.exit(app.exec_())
-    except SystemExit:
-        print('Closing Window...')
+map_widget.pack()
+root.mainloop()
