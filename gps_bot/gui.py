@@ -12,6 +12,15 @@ class GPSGui:
         label = LabelFrame(root)
         label.pack(pady=20)
 
+        start_button = Button(root, text="Start robot", command=self.click_start)
+        start_button.place(x=20, y=25)
+        
+        start_button = Button(root, text="Stop robot", command=self.click_stop)
+        start_button.place(x=20, y=65)
+        
+        start_button = Button(root, text="Camera", command=self.click_camera)
+        start_button.place(x=20, y=105)
+
         fime = [25.7252, -100.3135]
         fime_2 = [25.7258, -100.3138]
 
@@ -32,3 +41,12 @@ class GPSGui:
     
     def add_marker_event(self,coords):
         new_marker = self.map_widget.set_marker(coords[0], coords[1], text="position")
+    
+    def click_start(self):
+        print("start click")
+
+    def click_stop(self):
+        print("start stop")
+
+    def click_camera(self):
+        print("start camera")
