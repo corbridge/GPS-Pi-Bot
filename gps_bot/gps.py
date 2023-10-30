@@ -4,19 +4,22 @@ from time import sleep
 
 class InterfaceGPS:
     def __init__(self):
-        gpgga_info = "$GPGGA,"
-        ser = serial.Serial ("/dev/ttyAMA0")              #Open port with baud rate
-        GPGGA_buffer = 0
-        NMEA_buff = 0
-        received_data = (str)(ser.readline())
-        GPGGA_data_available = received_data.find(gpgga_info)                
+        self.gpgga_info = "$GPGGA,"
+        self.ser = serial.Serial ("/dev/ttyAMA0")              #Open port with baud rate
+        self.GPGGA_buffer = 0
+        self.NMEA_buff = 0
+
+    def get_position(self):
+        received_data = (str)(self.ser.readline())
+        GPGGA_data_available = received_data.find(self.gpgga_info)                
         if (GPGGA_data_available>0):
-            GPGGA_buffer = received_data.split("$GPGGA,",1)[1]
-            NMEA_buff = (GPGGA_buffer.split(','))
-            self.latitude, self.longitude = self.GPS_Info(NMEA_buff)
+            self.GPGGA_buffer = received_data.split("$GPGGA,",1)[1]
+            self.NMEA_buff = (self.GPGGA_buffer.split(','))
+            latitude, longitude = self.GPS_Info(self.NMEA_buff)
+            print(f'{latitude} and {longitude}')
+            return latitude, longitude
 
     def GPS_Info(self, NMEA_buff):
-
         nmea_latitude = []
         nmea_longitude = []
         nmea_latitude = NMEA_buff[1]
@@ -36,11 +39,3 @@ class InterfaceGPS:
         position = degrees + mm_mmmm
         position = "%.4f" % (position)
         return position
-
-    def get_position(self):
-        return self.latitude, self.longitude
-
-while True:
-    gps = InterfaceGPS()
-    latitude, longitude = gps.get_position()
-    print(f'Latitude:{latitude} longitude:{longitude}')

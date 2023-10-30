@@ -1,3 +1,7 @@
 from gui import GPSGui
+from gps import InterfaceGPS
 
-GPSGui()
+gps = InterfaceGPS()
+while True:
+    latitude, longitude = gps.get_position()
+    GPSGui(latitude, longitude)
