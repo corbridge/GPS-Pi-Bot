@@ -37,5 +37,10 @@ class InterfaceGPS:
         position = "%.4f" % (position)
         return position
 
+    def get_position(self):
+        return self.latitude, self.longitude
+
 while True:
-    InterfaceGPS()
+    gps = InterfaceGPS()
+    latitude, longitude = gps.get_position()
+    print(f'Latitude:{latitude} longitude:{longitude}')
