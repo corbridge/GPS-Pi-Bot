@@ -11,7 +11,7 @@ class InterfaceGPS:
 
     def get_position(self):
         try:
-            received_data = (str)(self.ser.readline())
+            received_data = str(self.ser.readline())
         except serial.serialutil.SerialException:
             received_data = '0'
         GPGGA_data_available = received_data.find(self.gpgga_info)                
