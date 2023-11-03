@@ -5,12 +5,15 @@ from time import sleep
 class InterfaceGPS:
     def __init__(self):
         self.gpgga_info = "$GPGGA,"
-        self.ser = serial.Serial ("/dev/ttyAMA0")              #Open port with baud rate
+        self.ser = serial.Serial ("/dev/ttyAMA0")
         self.GPGGA_buffer = 0
         self.NMEA_buff = 0
 
     def get_position(self):
-        received_data = (str)(self.ser.readline())
+        try:
+            received_data = (str)(self.ser.readline())
+        except serial.serialutil.SerialException:
+            pass
         GPGGA_data_available = received_data.find(self.gpgga_info)                
         if (GPGGA_data_available>0):
             self.GPGGA_buffer = received_data.split("$GPGGA,",1)[1]
