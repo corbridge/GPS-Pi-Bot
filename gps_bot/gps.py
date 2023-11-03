@@ -13,7 +13,7 @@ class InterfaceGPS:
         try:
             received_data = (str)(self.ser.readline())
         except serial.serialutil.SerialException:
-            pass
+            received_data = (str)(self.ser.readline())
         GPGGA_data_available = received_data.find(self.gpgga_info)                
         if (GPGGA_data_available>0):
             self.GPGGA_buffer = received_data.split("$GPGGA,",1)[1]
