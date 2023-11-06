@@ -33,7 +33,7 @@ class InterfaceGPS:
         longi = float(nmea_longitude)
         
         lat_in_degrees = self.convert_to_degrees(lat)
-        long_in_degrees = self.convert_to_degrees(longi)
+        long_in_degrees = self.convert_to_degrees(longi * -1)
         return lat_in_degrees, long_in_degrees
     
     def convert_to_degrees(self, raw_value):
