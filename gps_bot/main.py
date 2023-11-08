@@ -7,4 +7,4 @@ db = firebaseInit()
 gps = InterfaceGPS()
 while True:
     cordenates = gps.get_position()
-    db.update(cordenates[0], cordenates[1])
+    db.update(cordenates)

@@ -19,8 +19,8 @@ class InterfaceGPS:
             self.GPGGA_buffer = received_data.split("$GPGGA,",1)[1]
             self.NMEA_buff = (self.GPGGA_buffer.split(','))
             latitude, longitude = self.GPS_Info(self.NMEA_buff)
-            coordenates = [latitude, longitude]
-            print(f'{coordenates[0]} and {coordenates[1]}')
+            coordenates = {"latitude":latitude, "longitude" :longitude}
+            print(f'{coordenates["latitude"]} and {coordenates["longitude"]}')
             return coordenates
 
     def GPS_Info(self, NMEA_buff):
