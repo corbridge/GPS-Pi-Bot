@@ -1,4 +1,3 @@
-from gui import GPSGui
 from gps import InterfaceGPS
 from firebase_config import firebaseInit
 
