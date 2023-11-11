@@ -26,7 +26,7 @@ firebase.initializeApp(firebaseConfig );
 
 var ref = firebase.database().ref();
 
-ref.on("value", function(snapshot) {
+ref.on('value', function(snapshot) {
   var gps = snapshot.val();
   console.log(gps.latitude);
   console.log(gps.longitude);
