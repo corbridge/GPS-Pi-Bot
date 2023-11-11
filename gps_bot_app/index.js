@@ -1,12 +1,12 @@
-window.lat = 26.5;
-window.lng = -100.5;
+window.lat = 25.7;
+window.lng = -100.3;
 
 var map;
 var mark;
 var lineCoords = [];
   
 var initialize = function() {
-  map  = new google.maps.Map(document.getElementById('map'), {center:{lat:lat,lng:lng},zoom:12});
+  map  = new google.maps.Map(document.getElementById('map'), {center:{lat:lat,lng:lng},zoom:20});
   mark = new google.maps.Marker({position:{lat:lat, lng:lng}, map:map});
 };
 
