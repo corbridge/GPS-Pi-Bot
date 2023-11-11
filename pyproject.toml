@@ -10,6 +10,7 @@ packages = [{include = "gps_bot"}]
 python = "^3.11"
 tk = "0.1.0"
 tkintermapview = "1.29"
+pyrebase = "^3.0.27"
 
 [build-system]
 requires = ["poetry-core"]
