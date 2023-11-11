@@ -6,19 +6,19 @@ var mark;
 var lineCoords = [];
   
 var initialize = function() {
-  map  = new google.maps.Map(document.getElementById('map-canvas'), {center:{lat:lat,lng:lng},zoom:12});
+  map  = new google.maps.Map(document.getElementById('map'), {center:{lat:lat,lng:lng},zoom:12});
   mark = new google.maps.Marker({position:{lat:lat, lng:lng}, map:map});
 };
 
 const firebaseConfig = {
     apiKey: "AIzaSyCndLrX1QvxSug-lwX5-LfV1pTs_IegH3s",
     authDomain: "gps-pi-bot.firebaseapp.com",
-    projectId: "https://gps-pi-bot-default-rtdb.firebaseio.com",
-    storageBucket: "gps-pi-bot",
-    messagingSenderId: "gps-pi-bot.appspot.com",
-    appId: "237945598717",
-    measurementId: "1:237945598717:web:3143f5d47f0f8a8fb84494"
-    };
+    databaseURL: "https://gps-pi-bot-default-rtdb.firebaseio.com",
+    projectId: "gps-pi-bot",
+    storageBucket: "gps-pi-bot.appspot.com",
+    messagingSenderId: "237945598717",
+    appId: "1:237945598717:web:3143f5d47f0f8a8fb84494"
+  };
 
 window.initialize = initialize;
 
