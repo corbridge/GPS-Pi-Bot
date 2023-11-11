@@ -4,7 +4,7 @@ def firebaseInit():
   firebaseConfig = {
   "apiKey": "AIzaSyCndLrX1QvxSug-lwX5-LfV1pTs_IegH3s",
   "authDomain": "gps-pi-bot.firebaseapp.com",
-  "databaseaURL": "https://gps-pi-bot-default-rtdb.firebaseio.com",
+  "databaseURL": "https://gps-pi-bot-default-rtdb.firebaseio.com",
   "projectId": "gps-pi-bot",
   "storageBucket": "gps-pi-bot.appspot.com",
   "messagingSenderId": "237945598717",
