@@ -20,7 +20,12 @@ class InterfaceGPS:
             self.NMEA_buff = (self.GPGGA_buffer.split(','))
             latitude, longitude = self.GPS_Info(self.NMEA_buff)
             coordenates = {"latitude":float(latitude), "longitude" :float(longitude)}
+            self.write_data(coordenates)
             return coordenates
+
+    def write_data(self, data):
+        with open("/var/wwww/html/", "w") as file:
+            file.write(data)
 
     def GPS_Info(self, NMEA_buff):
         nmea_latitude = []
