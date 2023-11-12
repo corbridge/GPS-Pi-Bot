@@ -24,7 +24,7 @@ class InterfaceGPS:
             return coordenates
 
     def write_data(self, data):
-        with open("/var/wwww/html/", "w") as file:
+        with open("/var/wwww/html/data.txt", "w") as file:
             file.write(data)
 
     def GPS_Info(self, NMEA_buff):
