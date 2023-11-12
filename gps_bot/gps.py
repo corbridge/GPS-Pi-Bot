@@ -25,7 +25,8 @@ class InterfaceGPS:
 
     def write_data(self, data):
         with open("/var/www/html/data.txt", "w") as file:
-            file.write(data)
+            file.write(f'Latitude={data["latitude"]}')
+            file.write(f'Longitude={data["longitude"]}')
 
     def GPS_Info(self, NMEA_buff):
         nmea_latitude = []
