@@ -25,8 +25,8 @@ class InterfaceGPS:
 
     def sending_data_js(self, data):
         with open("data.js",'w') as file:
-            file.write(data["latitude"])
-            file.write(data["longitude"])
+            file.write(f"latitude: {str(data["latitude"])}")
+            file.write(f"longitude: {str(data["longitude"])}")
 
 
     def GPS_Info(self, NMEA_buff):
