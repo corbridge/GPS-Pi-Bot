@@ -1,6 +1,7 @@
 import serial
-from time import sleep
-
+import json
+import ast
+import sys
 
 class InterfaceGPS:
     def __init__(self):
@@ -20,13 +21,11 @@ class InterfaceGPS:
             self.NMEA_buff = (self.GPGGA_buffer.split(','))
             latitude, longitude = self.GPS_Info(self.NMEA_buff)
             coordenates = {"latitude":float(latitude), "longitude" :float(longitude)}
-            self.write_data(coordenates)
             return coordenates
 
-    def write_data(self, data):
-        with open("/var/www/html/data.txt", "w") as file:
-            file.write(f'Latitude={data["latitude"]}')
-            file.write(f'Longitude={data["longitude"]}')
+    def sending_data_js(self, data):
+        json.dumps(data)
+        sys.stdout.flush()
 
     def GPS_Info(self, NMEA_buff):
         nmea_latitude = []
