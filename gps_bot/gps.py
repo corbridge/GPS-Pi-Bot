@@ -25,7 +25,7 @@ class InterfaceGPS:
 
     def sending_data_js(self, data):
         if data is not None:
-            with open("data.js",'w') as file:
+            with open("/var/www/html/data.js",'w') as file:
                 file.write(f"var latitude =  {str(data['latitude'])};\n")
                 file.write(f"var longitude = {str(data['longitude'])};")
         else:
