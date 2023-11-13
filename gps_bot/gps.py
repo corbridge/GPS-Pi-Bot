@@ -24,10 +24,12 @@ class InterfaceGPS:
             return coordenates
 
     def sending_data_js(self, data):
-        with open("data.js",'w') as file:
-            file.write(f"latitude: {str(data["latitude"])}")
-            file.write(f"longitude: {str(data["longitude"])}")
-
+        if data is not None:
+            with open("data.js",'w') as file:
+                file.write(f"latitude: {str(data['latitude'])}")
+                file.write(f"longitude: {str(data['longitude'])}")
+        else:
+            pass
 
     def GPS_Info(self, NMEA_buff):
         nmea_latitude = []
