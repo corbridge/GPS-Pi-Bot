@@ -24,7 +24,10 @@ class InterfaceGPS:
             return coordenates
 
     def sending_data_js(self, data):
-        json.dumps(data)
+        input = ast.literal_eval(sys.argv[1])
+        output = input
+        output.append(data)
+        print(json.dumps(output))
         sys.stdout.flush()
 
     def GPS_Info(self, NMEA_buff):
