@@ -12,12 +12,14 @@
     font-family: 'Century Gothic';
     font-weight: bold;
     font-size: 200%;
-    text-shadow: 1px,1px,2px,#000000;
 }
 .title2{
     text-align: center;
     font-family: 'Century Gothic';
     font-weight: bold;
     font-size: 100%;
-    text-shadow: 1px,1px,2px,#000000;
+}
+
+body{
+    background-image: url(https://c.wallhere.com/photos/d3/49/Need_for_Speed_car_race_cars_night_Street_Racing-1885531.jpg!d);
 }
