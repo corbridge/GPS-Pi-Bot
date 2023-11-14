@@ -1,6 +1,6 @@
 #map {
-    width:920px;
-    height:500px;
+    width:820px;
+    height:450px;
     border: 6px solid rgba(255, 17, 0, 0.76);
     border-radius: 3%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -12,6 +12,8 @@
     font-family: 'Century Gothic';
     font-weight: bold;
     font-size: 300%;
+    padding-top: 1px;
+    padding-bottom: 1px;
     
 }
 .title2{
