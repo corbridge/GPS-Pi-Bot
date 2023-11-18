@@ -29,6 +29,7 @@ class InterfaceGPS:
             with open("/var/www/html/data.js",'w') as file:
                 file.write(f"let latitude =  {str(data['latitude'])};\n")
                 file.write(f"let longitude = {str(data['longitude'])};")
+                file.write(f"observador.notificarObservadores(latitude, longitude);")
         else:
             pass
 
