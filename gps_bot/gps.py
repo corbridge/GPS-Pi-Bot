@@ -1,7 +1,5 @@
 import serial
-import json
-import ast
-import sys
+from math import radians, sin, cos, sqrt, atan2, degrees, pi
 
 class InterfaceGPS:
     def __init__(self):
@@ -52,3 +50,34 @@ class InterfaceGPS:
         position = degrees + mm_mmmm
         position = "%.4f" % (position)
         return position
+
+    def distanceBetween(self, origin_lat, origin_long, dest_lat, dest_long):
+        # Earth Radious (km)
+        R = 6371.0
+
+        origin_lat, origin_long, dest_lat, dest_long = map(radians, [origin_lat, origin_long, dest_lat, dest_long])
+
+        dlat = dest_lat - origin_lat
+        dlon = dest_long - origin_long
+
+        # Haversine Formula
+        a = sin(dlat / 2)**2 + cos(origin_lat) * cos(dest_lat) * sin(dlon / 2)**2
+        c = 2 * atan2(sqrt(a), sqrt(1 - a))
+        distance = R * c
+
+        return distance
+
+    def course_to(self, origin_lat, origin_long, dest_lat, dest_long):
+        dlon = radians(dest_long - origin_long)
+
+        origin_lat, dest_lat = radians(origin_lat), radians(dest_lat)
+
+        a1 = sin(dlon) * cos(dest_lat)
+        a2 = sin(origin_lat) * cos(dest_lat) * cos(dlon)
+        a2 = cos(origin_lat) * sin(dest_lat) - a2
+
+        # Azimuthal angle
+        azimuth = atan2(a1, a2)
+        azimuth = (azimuth + 2 * pi) % (2 * pi)
+
+        return degrees(azimuth)

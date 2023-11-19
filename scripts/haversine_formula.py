@@ -19,8 +19,8 @@ def haversine_distance(lat1, lon1, lat2, lon2):
     return distance
 
 # Ejemplo de uso
-lat1, lon1 = 37.7749, -122.4194  # Coordenadas de San Francisco, CA
-lat2, lon2 = 34.0522, -118.2437  # Coordenadas de Los Angeles, CA
+lat1, lon1 = 25.6750, -100.3184  # Mty
+lat2, lon2 = 25.74167, -100.30222  # san Nico
 
 result = haversine_distance(lat1, lon1, lat2, lon2)
-print(f"Distancia entre los puntos: {result:.2f} km")
+print(f"Distancia entre los puntos: {result} km")
