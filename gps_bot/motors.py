@@ -51,10 +51,3 @@ class Direction:
         self.servo.ChangeDutyCycle(8.15)
         time.sleep(0.010)
         self.servo.ChangeDutyCycle(0)
-
-motor = Direction()
-while True:
-    motor.left()
-    time.sleep(5)
-    motor.right()
-    time.sleep(5)
