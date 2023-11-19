@@ -34,3 +34,7 @@ class Motor:
     def foward(self):
         self.my_pwm.ChangeDutyCycle(0)
         self.my_pwm1.ChangeDutyCycle(30)
+
+
+motor = Motor()
+motor.foward()
