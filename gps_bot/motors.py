@@ -54,7 +54,6 @@ class Direction:
 
 motor = Direction()
 while True:
-    motor.foward()
     motor.left()
     time.sleep(5)
     motor.right()
