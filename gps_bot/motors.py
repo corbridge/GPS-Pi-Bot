@@ -37,4 +37,5 @@ class Motor:
 
 
 motor = Motor()
-motor.foward()
+while True:
+    motor.foward()
