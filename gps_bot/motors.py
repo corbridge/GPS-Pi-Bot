@@ -27,11 +27,11 @@ class Motor:
         self.my_pwm.ChangeDutyCycle(0)
         self.my_pwm1.ChangeDutyCycle(0)
 
-    def back(self):
+    def foward(self):
         self.my_pwm.ChangeDutyCycle(25)
         self.my_pwm1.ChangeDutyCycle(0)
 
-    def foward(self):
+    def backward(self):
         self.my_pwm.ChangeDutyCycle(0)
         self.my_pwm1.ChangeDutyCycle(30)
 
