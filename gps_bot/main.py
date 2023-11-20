@@ -9,7 +9,7 @@ lat2, lon2 = 25.7422753, -100.2794433  # san Nico
 
 while True:
     cordenates = gps.get_position()
-    gps.sending_data_js(cordenates)
+    #gps.sending_data_js(cordenates)
 
     distance = gps.distanceBetween(cordenates['latitude'], cordenates['longitude'],lat2, lon2)
     angle = gps.course_to(cordenates['latitude'], cordenates['longitude'],lat2, lon2)
