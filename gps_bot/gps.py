@@ -68,7 +68,7 @@ class InterfaceGPS:
         c = 2 * atan2(sqrt(a), sqrt(1 - a))
         distance = R * c
 
-        return distance
+        return distance /1000 #meters
 
     def course_to(self, origin_lat, origin_long, dest_lat, dest_long):
         dlon = radians(dest_long - origin_long)
