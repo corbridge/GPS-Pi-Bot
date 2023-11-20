@@ -48,7 +48,7 @@ class InterfaceGPS:
         degrees = int(decimal_value)
         mm_mmmm = (decimal_value - int(decimal_value))/0.6
         position = degrees + mm_mmmm
-        position = "%.4f" % (position)
+        position = "%.7f" % (position)
         return position
 
     def distanceBetween(self, origin_lat, origin_long, dest_lat, dest_long):
