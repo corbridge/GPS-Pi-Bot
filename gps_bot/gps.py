@@ -19,7 +19,10 @@ class InterfaceGPS:
             self.NMEA_buff = (self.GPGGA_buffer.split(','))
             latitude, longitude = self.GPS_Info(self.NMEA_buff)
             coordenates = {'latitude':float(latitude), 'longitude' :float(longitude)}
-            return coordenates
+            if coordenates is None:
+                pass
+            else:
+                return coordenates
 
     def sending_data_js(self, data):
         if data is not None:
