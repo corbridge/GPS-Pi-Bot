@@ -14,11 +14,6 @@ function initialize(){
     map: map
   })
 
-
-  google.maps.event.addListener(map, "click", (event) => {
-    addListing(event.latLng, map);
-  });
-
   const topControl = document.createElement("div");
   const destination_created = createDestination(map);
 
@@ -30,6 +25,10 @@ function initialize(){
 
   bottomControl.appendChild(destination_erased);
   map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(bottomControl);
+
+  google.maps.event.addListener(map, "click", (event) => {
+    addListing(event.latLng, map, destination_created);
+  });  
 
 }
 
@@ -45,7 +44,7 @@ return marker;
 
 
 var i=0
-function addListing(location, map) {
+function addListing(location, map, controller) {
   var iMax=1;
 
   if(i<iMax) {
@@ -53,12 +52,15 @@ function addListing(location, map) {
     i++;
     console.log('count: ',i);
   }
+
+controller.addEventListener("click", () => {
 var dest_lat = marker.getPosition().lat();
 var dest_lng = marker.getPosition().lng();
 
 console.log("Latitud destino: ",dest_lat);
 console.log("Longitud destino: ",dest_lng);
 
+});
 }
 
 
