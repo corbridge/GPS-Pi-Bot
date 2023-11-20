@@ -22,8 +22,8 @@ def azimuth_angle(lat1, lon1, lat2, lon2):
     return degrees(azimuth)
 
 # Ejemplo de uso
-lat1, lon1 = 37.7749, -122.4194  # Coordenadas de San Francisco, CA
-lat2, lon2 = 34.0522, -118.2437  # Coordenadas de Los Angeles, CA
+lat1, lon1 = 25.7423252, -100.2794307  # Mty
+lat2, lon2 = 25.7422753, -100.2794433  # san Nico
 
 result = azimuth_angle(lat1, lon1, lat2, lon2)
 print(f"Ángulo Azimutal (Rumbo): {result:.2f} grados")

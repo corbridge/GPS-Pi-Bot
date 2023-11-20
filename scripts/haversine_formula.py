@@ -16,11 +16,11 @@ def haversine_distance(lat1, lon1, lat2, lon2):
     c = 2 * atan2(sqrt(a), sqrt(1 - a))
     distance = R * c
 
-    return distance
+    return distance/1000
 
 # Ejemplo de uso
-lat1, lon1 = 25.6750, -100.3184  # Mty
-lat2, lon2 = 25.74167, -100.30222  # san Nico
+lat1, lon1 = 25.7423252, -100.2794307  # Mty
+lat2, lon2 = 25.7422753, -100.2794433  # san Nico
 
 result = haversine_distance(lat1, lon1, lat2, lon2)
-print(f"Distancia entre los puntos: {result} km")
+print(f"Distancia entre los puntos: {result} m")
