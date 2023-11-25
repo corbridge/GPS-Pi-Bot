@@ -1,33 +1,37 @@
+var main_marker;
+var main_map;
+var lineCoords = [];
+
 function initialize(){
 
-  var cord = {lat:25.73404, lng:-100.2996872};
-  var map = new google.maps.Map(
+  var cord = {lat:lat, lng:lng};
+  main_map = new google.maps.Map(
     document.getElementById('map'),
     {zoom:20,
     center:cord
     }
   );
 
-  var marker = new google.maps.Marker({
+   main_marker = new google.maps.Marker({
     icon:'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
     position:cord,
-    map: map
+    map: main_map
   })
 
   const topControl = document.createElement("div");
-  const destination_created = createDestination(map);
+  const destination_created = createDestination(main_map);
 
   topControl.appendChild(destination_created);
-  map.controls[google.maps.ControlPosition.TOP_CENTER].push(topControl);
+  main_map.controls[google.maps.ControlPosition.TOP_CENTER].push(topControl);
 
   const bottomControl = document.createElement("div");
-  const destination_erased = eraseDestination(map, destination_created);
+  const destination_erased = eraseDestination(main_map, destination_created);
 
   bottomControl.appendChild(destination_erased);
-  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(bottomControl);
+  main_map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(bottomControl);
 
-  google.maps.event.addListener(map, "click", (event) => {
-    addListing(event.latLng, map, destination_created);
+  google.maps.event.addListener(main_map, "click", (event) => {
+    addListing(event.latLng, main_map, destination_created);
   });  
 
 }
@@ -120,3 +124,42 @@ function eraseDestination(map, destination_button) {
   });
 return controlButton;
 }
+window.lat = 25.73408
+window.lng = -100.29968
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCndLrX1QvxSug-lwX5-LfV1pTs_IegH3s",
+    authDomain: "gps-pi-bot.firebaseapp.com",
+    databaseURL: "https://gps-pi-bot-default-rtdb.firebaseio.com",
+    projectId: "gps-pi-bot",
+    storageBucket: "gps-pi-bot.appspot.com",
+    messagingSenderId: "237945598717",
+    appId: "1:237945598717:web:3143f5d47f0f8a8fb84494"
+  };
+
+window.initialize = initialize;
+
+firebase.initializeApp(firebaseConfig );
+
+var ref = firebase.database().ref();
+
+ref.on('value', function(snapshot) {
+  var gps = snapshot.val();
+  console.log(typeof gps.latitude);
+  console.log(typeof gps.longitude);
+  lat = gps.latitude;
+  lng = gps.longitude;
+
+  main_marker.setPosition({lat:lat, lng:lng, alt:0});
+  
+  lineCoords.push(new google.maps.LatLng(lat, lng));
+
+  var lineCoordinatesPath = new google.maps.Polyline({
+    path: lineCoords,
+    geodesic: true,
+    strokeColor: '#2E10FF'
+  });
+  
+  lineCoordinatesPath.setMap(main_map);
+});
