@@ -27,8 +27,8 @@ class InterfaceGPS:
         if data is not None:
             print(data)
             with open("/var/www/html/data.js",'w') as file:
-                file.write(f"var latitude =  {str(data['latitude'])};\n")
-                file.write(f"var longitude = {str(data['longitude'])};")
+                file.write(f"let latitude =  {str(data['latitude'])};\n")
+                file.write(f"let longitude = {str(data['longitude'])};\n")
         else:
             pass
 
