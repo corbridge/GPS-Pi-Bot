@@ -4,7 +4,7 @@ from math import radians, sin, cos, sqrt, atan2, degrees, pi
 class InterfaceGPS:
     def __init__(self):
         self.gpgga_info = "$GPGGA,"
-        self.ser = serial.Serial ("/dev/ttyAMA0")
+        self.ser = serial.Serial ("/dev/ttyAMA0", 9600)
         self.GPGGA_buffer = 0
         self.NMEA_buff = 0
 
@@ -54,21 +54,24 @@ class InterfaceGPS:
         position = "%.5f" % (position)
         return position
 
-    def distanceBetween(self, origin_lat, origin_long, dest_lat, dest_long):
+    def distanceBetween(self, lat1, lon1, lat2, lon2):
         # Earth Radious (km)
-        R = 6371.0
+        # Radio de la Tierra en metros
+        R = 6371000.0
 
-        origin_lat, origin_long, dest_lat, dest_long = map(radians, [origin_lat, origin_long, dest_lat, dest_long])
+        # Convierte las coordenadas de grados a radianes
+        lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
 
-        dlat = dest_lat - origin_lat
-        dlon = dest_long - origin_long
+        # Diferencias de latitud y longitud
+        dlat = lat2 - lat1
+        dlon = lon2 - lon1
 
-        # Haversine Formula
-        a = sin(dlat / 2)**2 + cos(origin_lat) * cos(dest_lat) * sin(dlon / 2)**2
+        # Fórmula de Haversine
+        a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
         c = 2 * atan2(sqrt(a), sqrt(1 - a))
         distance = R * c
 
-        return distance /1000 #meters
+        return distance
 
     def course_to(self, origin_lat, origin_long, dest_lat, dest_long):
         dlon = radians(dest_long - origin_long)

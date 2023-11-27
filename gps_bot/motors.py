@@ -35,7 +35,8 @@ class Direction:
         self.my_pwm1.ChangeDutyCycle(0)
 
     def foward(self):
-        self.my_pwm.ChangeDutyCycle(25)
+        self.servo.ChangeDutyCycle(self.angle_to_percent(90))
+        self.my_pwm.ChangeDutyCycle(14)
         self.my_pwm1.ChangeDutyCycle(0)
 
     def backward(self):
@@ -51,3 +52,15 @@ class Direction:
         self.servo.ChangeDutyCycle(8.15)
         time.sleep(0.010)
         self.servo.ChangeDutyCycle(0)
+    
+    def angle_to_percent(self, angle) :
+        if angle > 180 or angle < 0 :
+            return False
+
+        start = 4
+        end = 12.5
+        ratio = (end - start)/180 #Calcul ratio from angle to percent
+
+        angle_as_percent = angle * ratio
+
+        return start + angle_as_percent
