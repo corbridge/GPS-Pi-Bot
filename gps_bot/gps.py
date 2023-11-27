@@ -1,12 +1,10 @@
 import serial
-import json
-import ast
-import sys
+from math import radians, sin, cos, sqrt, atan2, degrees, pi
 
 class InterfaceGPS:
     def __init__(self):
         self.gpgga_info = "$GPGGA,"
-        self.ser = serial.Serial ("/dev/ttyAMA0")
+        self.ser = serial.Serial ("/dev/ttyAMA0", 9600)
         self.GPGGA_buffer = 0
         self.NMEA_buff = 0
 
@@ -20,8 +18,11 @@ class InterfaceGPS:
             self.GPGGA_buffer = received_data.split("$GPGGA,",1)[1]
             self.NMEA_buff = (self.GPGGA_buffer.split(','))
             latitude, longitude = self.GPS_Info(self.NMEA_buff)
-            coordenates = {"latitude":float(latitude), "longitude" :float(longitude)}
-            return coordenates
+            coordenates = {'latitude':float(latitude), 'longitude' :float(longitude)}
+            if coordenates is None:
+                pass
+            else:
+                return coordenates
 
     def sending_data_js(self, data):
         if data is not None:
@@ -50,5 +51,39 @@ class InterfaceGPS:
         degrees = int(decimal_value)
         mm_mmmm = (decimal_value - int(decimal_value))/0.6
         position = degrees + mm_mmmm
-        position = "%.4f" % (position)
+        position = "%.5f" % (position)
         return position
+
+    def distanceBetween(self, lat1, lon1, lat2, lon2):
+        # Earth Radious (km)
+        # Radio de la Tierra en metros
+        R = 6371000.0
+
+        # Convierte las coordenadas de grados a radianes
+        lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
+
+        # Diferencias de latitud y longitud
+        dlat = lat2 - lat1
+        dlon = lon2 - lon1
+
+        # Fórmula de Haversine
+        a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+        c = 2 * atan2(sqrt(a), sqrt(1 - a))
+        distance = R * c
+
+        return distance
+
+    def course_to(self, origin_lat, origin_long, dest_lat, dest_long):
+        dlon = radians(dest_long - origin_long)
+
+        origin_lat, dest_lat = radians(origin_lat), radians(dest_lat)
+
+        a1 = sin(dlon) * cos(dest_lat)
+        a2 = sin(origin_lat) * cos(dest_lat) * cos(dlon)
+        a2 = cos(origin_lat) * sin(dest_lat) - a2
+
+        # Azimuthal angle
+        azimuth = atan2(a1, a2)
+        azimuth = (azimuth + 2 * pi) % (2 * pi)
+
+        return degrees(azimuth)
